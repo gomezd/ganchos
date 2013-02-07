@@ -1,6 +1,9 @@
 
 routes:
 
+    "/bar":
+        hooks: [ test ]
+        
     "/foo":
         hooks: [ test, bugs ]
         config:
@@ -10,10 +13,6 @@ routes:
 
             bugs:
                 some: value
-
-    "/bar":
-        hooks: [ test ]
-
 config:
     test:
         prop: global value for test hook
