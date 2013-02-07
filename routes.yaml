@@ -1,0 +1,22 @@
+
+routes:
+
+    "/foo":
+        hooks: [ test, bugs ]
+        config:
+            test:
+                foo: bar
+                baz: quux
+
+            bugs:
+                some: value
+
+    "/bar":
+        hooks: [ test ]
+
+config:
+    test:
+        prop: global value for test hook
+
+    bugs:
+        another: global property for bugs hook
