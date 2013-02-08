@@ -27,9 +27,10 @@ var fs = require('fs'),
     };
 
 fs.readdirSync(__dirname + '/hooks').forEach(function(filename){
-    if (!/\.js$/.test(filename)) return;
-    var name = basename(filename, '.js');
-    function load(){ return require('./hooks/' + name); }
+    var name = basename(filename, '.js'),
+        load = function () {
+            return require('./hooks/' + name);
+        };
     hooks.__defineGetter__(name, load);
 });
 

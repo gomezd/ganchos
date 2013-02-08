@@ -2,7 +2,7 @@
 routes:
 
     "/bar":
-        hooks: [ test ]
+        hooks: [ test, packaged, pkgjson ]
         
     "/foo":
         hooks: [ test, bugs ]

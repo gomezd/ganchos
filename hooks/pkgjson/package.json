@@ -1,0 +1,8 @@
+{
+    "name": "pkged-hook-with-deps",
+    "version": "0.0.1",
+    "main": "lib/hook.js",
+    "dependencies": {
+        "colors": "0.6.0-1"
+    }
+}
