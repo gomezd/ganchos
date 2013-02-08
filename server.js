@@ -3,6 +3,7 @@
 var fs = require('fs'),
     path = require('path'),
     yaml = require('js-yaml'),
+    debug = require('debug')('githooks:server'),
     basename = path.basename,
     
     meta = require('./routes.yaml'),
@@ -15,8 +16,14 @@ var fs = require('fs'),
     hooks = {},
 
     noContentHandler = function (req, res) {
-        console.log('Handled request.');
+        debug('No content handler: request to %s', req.url);
         res.send(204);
+    },
+
+    errorHandler = function (err, req, res, next) {
+        debug("handling error");
+        console.error(err.stack);
+        res.send(500);
     };
 
 fs.readdirSync(__dirname + '/hooks').forEach(function(filename){
@@ -26,28 +33,25 @@ fs.readdirSync(__dirname + '/hooks').forEach(function(filename){
     hooks.__defineGetter__(name, load);
 });
 
-// Object.keys(hooks).forEach(function (h) {
-//     app.use(h, hooks[h]);
-//     console.log('Attached hook: ' + h);
-// });
-
 Object.keys(routes).forEach(function (path) {
     var route = routes[path],
         config = {
             hello: "world"
-        };
+        },
+        handlers = [];
 
     route.hooks.forEach(function (name) {
         var hook = hooks[name],
             config = hook.config;
-console.log(path + ' > ' + name);
-        app.use(path, hook(config));
+        handlers.push(hook(config));
+        debug('Attached %s > %s(%s)', path, name, hook.name || 'anonymous');
     });
 
+    app.get(path, handlers);
     app.get(path, noContentHandler);
-    console.log('Attached ' + path + ' ' + route.hooks);
 });
 
+app.use(errorHandler);
 app.listen(port, function () {
     console.log('Listening on port ' + port);
 });
