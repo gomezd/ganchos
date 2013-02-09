@@ -1,5 +1,5 @@
 
-var debug = require('debug')('githooks:pkgjson'),
+var debug = require('debug')('ganchos:pkgjson'),
     colors = require('colors');
 
 exports = module.exports = pkgjson = function (options) {

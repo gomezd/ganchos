@@ -1,5 +1,5 @@
 
-var debug = require('debug')('githooks:bugs');
+var debug = require('debug')('ganchos:bugs');
 
 exports = module.exports = function bugs (options) {
     return function bugsHook (req, res, next) {

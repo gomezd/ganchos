@@ -1,5 +1,5 @@
 
-var debug = require('debug')('githooks:packaged');
+var debug = require('debug')('ganchos:packaged');
 
 exports = module.exports = packaged = function (options) {
     return function packagedHook (req, res, next) {
