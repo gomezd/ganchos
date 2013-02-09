@@ -3,7 +3,7 @@ routes:
 
     "/bar":
         hooks: [ test, packaged, pkgjson ]
-        
+
     "/foo":
         hooks: [ test, bugs ]
         config:
@@ -19,3 +19,7 @@ config:
 
     bugs:
         another: global property for bugs hook
+
+npm:
+    bin: "/usr/local/bin/npm"
+    registry: "http://registry.npmjs.org"
