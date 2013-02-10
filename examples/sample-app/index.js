@@ -1,8 +1,9 @@
 #! /usr/bin/env node
 
-var hooks = require('../../lib/app'),
-    port = 8080;
+var ganchos = require('../../lib/ganchos'),
+    port = 8080,
+    app = ganchos();
 
-hooks.listen(port, function () {
+app.listen(port, function () {
     console.log('Listening on port ' + port);
 });
